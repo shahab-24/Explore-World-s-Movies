@@ -6,6 +6,7 @@ import AddMovie from "../Pages/AddMovie";
 import AllMovies from "../Pages/AllMovies";
 import MyFavourites from "../Pages/MyFavourites";
 import NotFound from "../Pages/NotFound";
+import Home from "../Pages/Home";
 
 
 
@@ -16,6 +17,11 @@ const router = createBrowserRouter([
 		children:[{
 			path: "/addMovie",
 		element: <AddMovie></AddMovie>
+		},
+		{
+			path:'/',
+			element: <Home></Home>
+
 		},
 		{
 			path: "/allMovies",
