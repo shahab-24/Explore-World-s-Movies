@@ -1,23 +1,17 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
-// import AOS from "aos";
-// import "aos/dist/aos.css"; 
+
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 const Login = () => {
-  const { userLogin, setUser, handleGoogleLogin } = useContext(AuthContext);
+  const { userLogin, setUser } = useContext(AuthContext);
   const [err, setErr] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
-  
-//   useEffect(() => {
-//     AOS.init({ duration: 2000, offset: 50 }); 
-//   }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -40,8 +34,6 @@ const Login = () => {
           });
           navigate(location?.state ? location.state : "/");
           form.reset();
-        } else {
-          return;
         }
       })
       .catch((error) => {
@@ -51,36 +43,35 @@ const Login = () => {
           icon: "error",
           title: "Oops...",
           text: `${errorMessage}`,
-          footer: '<a href="#">Why do I have this issue?</a>',
         });
       });
   };
 
-
-  
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   return (
     <div
-      className="w-11/12 mx-auto h-[670px] mt-4 flex justify-center items-center py-10"
+      className="w-full min-h-screen flex justify-center items-center bg-cover bg-center"
       style={{
-        backgroundImage: "url('https://i.ibb.co.com/6R51DRP/marldive-water-2.jpg')",
-        backgroundSize: "cover",
+        backgroundImage: "url('https://i.ibb.co/6R51DRP/marldive-water-2.jpg')",
       }}
     >
       <div
-        className="card opacity-8 py-10 h-[600px] transparent max-w-lg w-full shrink-0 shadow-2xl p-10 my-4"
-        data-aos="zoom-in" 
+        className="card relative z-10 py-10 max-w-lg w-full shadow-2xl p-10"
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(10px)",
+        }}
       >
-        <h2 className="font-bold text-center text-purple-700 text-3xl">
+        <h2 className="font-bold text-center text-purple-700 text-3xl mb-4">
           Login to your Account
         </h2>
-        <form onSubmit={handleLogin} className="card-body">
-          <div className="form-control">
+        <form onSubmit={handleLogin}>
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text text-purple-700 text-xl font-semibold ">
+              <span className="label-text text-purple-700 text-lg font-semibold">
                 Email
               </span>
             </label>
@@ -94,82 +85,38 @@ const Login = () => {
               required
             />
           </div>
-          <div className="form-control relative">
+          <div className="form-control mb-4 relative">
             <label className="label">
-              <span className="label-text text-purple-700 text-xl font-semibold ">
+              <span className="label-text text-purple-700 text-lg font-semibold">
                 Password
               </span>
             </label>
             <input
-                          type={showPassword ? "text" : "password"}
-
+              type={showPassword ? "text" : "password"}
               placeholder="password"
-              className="input input-bordered text-black"
+              className="input input-bordered"
               name="password"
               required
             />
-              
             <button
               type="button"
               onClick={handleShowPassword}
-              className="flex items-center justify-center btn btn-sm border-none hover:bg-none bg-transparent absolute right-2 bottom-16 text-white"
+              className="absolute right-4 top-16 text-black"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
-            <label className="label">
-             <div className="mt-4 text-center text-black">
-          <Link
-            to="/forgotPassword"
-            state={{ email }} 
-            className="text-black hover:underline"
-          >
-            Forgot Password?
-          </Link>
-        </div>
-            </label>
           </div>
-          <div className="form-control mt-6">
+          <div className="form-control mb-4">
             <button className="btn btn-primary">Login</button>
           </div>
-          <p className="text-black font-semibold">
-            Don't Have an Account? Please{" "}
-            <Link to="/signup">
-              <button className="btn btn-primary btn-sm mb-2">
-                <span className="text-purple-700 font-semibold">Sign Up</span>
-              </button>
-              
-              <div className="flex justify-center lg:justify-between items-center flex-col lg:flex-row gap-2">
-          <div className="flex ">
-            <button
-              className="btn btn-outline btn-xs flex text-black"
-              onClick={handleGoogleLogin}
-            >
-              Login with GOOGLE
-              <img
-                className="w-[10%]"
-                src="https://img.icons8.com/?size=48&id=17949&format=png"
-                alt=""
-              />
-            </button>
-          </div>
-
-
-          <div className="flex my-2">
-            <button className="btn btn-outline btn-xs text-black">
-              Login with GITHUB
-              <img
-                className="w-[10%]"
-                src="https://img.icons8.com/?size=50&id=12598&format=png"
-                alt=""
-              />
-            </button>
-          </div>
-        </div>
+          <p className="text-center text-black font-semibold">
+            Don’t have an account?{" "}
+            <Link to="/signup" className="text-purple-700 underline">
+              Sign Up
             </Link>
           </p>
-          {err && <p className="text-red-700 font-semibold">{err}</p>}
+          {err && <p className="text-red-700 mt-2">{err}</p>}
         </form>
-      
       </div>
     </div>
   );

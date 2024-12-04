@@ -7,6 +7,7 @@ import AllMovies from "../Pages/AllMovies";
 import MyFavourites from "../Pages/MyFavourites";
 import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Home";
+import FeaturedMovies from "../Components/FeaturedMovies";
 
 
 
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
 		{
 			path:"/myFavourites",
 			element: <MyFavourites></MyFavourites>
+		},
+		{
+			path: "/login",
+			element: <Login></Login>
+		},
+		{
+			path: "/featured-movies",
+			element: <FeaturedMovies></FeaturedMovies>
 		}
 
 		]  
@@ -39,10 +48,7 @@ const router = createBrowserRouter([
 
 		
 	},
-	{
-		path: "/login",
-		element: <Login></Login>
-	},
+	
 	{
 		path: '/signup',
 		element: <Signup></Signup>
