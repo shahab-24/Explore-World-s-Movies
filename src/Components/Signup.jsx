@@ -45,6 +45,18 @@ const Signup = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        console.log(user)
+        // fetch("http://localhost:3000/users",{
+        //   method: "POST",
+        //   headers: {
+        //     "content-type" : "application/json"
+        //   },
+        //   body: JSON.stringify(user)
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //   console.log(data)
+        // })
         manageUpdateProfile(name, photo);
 
         setUser(user);
