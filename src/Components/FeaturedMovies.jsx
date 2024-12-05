@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+// FeaturedMovies.jsx
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const FeaturedMovies = () => {
@@ -6,46 +7,30 @@ const FeaturedMovies = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/movies")
+    fetch("http://localhost:3000/movies") // Replace with your backend URL
       .then((res) => res.json())
-      .then((data) => setMovies(data))
-      .catch((error) => console.error("Error fetching movies:", error));
+      .then((data) => setMovies(data));
   }, []);
 
-  const handleDetails = (id) => {
-    navigate(`/movies/${id}`); // Navigate to movie details page
-  };
-
   return (
-    <div className="w-11/12 mx-auto my-8">
-      <h2 className="text-3xl font-bold mb-6">Featured Movies</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="container mx-auto py-8">
+      <h2 className="text-3xl font-bold text-center mb-6">Featured Movies</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {movies.map((movie) => (
-          <div
-            key={movie._id}
-            className="card shadow-lg p-4 bg-white hover:shadow-2xl transition-all"
-          >
+          <div key={movie._id} className="bg-white rounded shadow-lg p-4">
             <img
               src={movie.poster}
               alt={movie.title}
-              className="w-full h-60 object-cover mb-4 rounded"
+              className="w-full h-[200px] object-cover rounded mb-4"
             />
-            <h3 className="text-xl font-bold">{movie.title}</h3>
-            <p className="text-sm text-gray-600">
-              Genre: <span className="text-gray-800">{movie.genre}</span>
-            </p>
-            <p className="text-sm text-gray-600">
-              Duration: <span className="text-gray-800">{movie.duration}</span>
-            </p>
-            <p className="text-sm text-gray-600">
-              Release Year: <span className="text-gray-800">{movie.releaseYear}</span>
-            </p>
-            <p className="text-sm text-gray-600">
-              Rating: <span className="text-gray-800">{movie.rating}</span>
-            </p>
+            <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
+            <p className="text-gray-600 mb-1">Genre: {movie.genre}</p>
+            <p className="text-gray-600 mb-1">Duration: {movie.duration} min</p>
+            <p className="text-gray-600 mb-1">Release Year: {movie.releaseYear}</p>
+            <p className="text-yellow-500 font-semibold">Rating: {movie.rating}⭐</p>
             <button
-              className="btn btn-primary mt-4"
-              onClick={() => handleDetails(movie._id)}
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              onClick={() => navigate(`/movies/${movie._id}`)}
             >
               See Details
             </button>
@@ -54,8 +39,8 @@ const FeaturedMovies = () => {
       </div>
       <div className="text-center mt-8">
         <button
-          className="btn btn-secondary"
-          onClick={() => navigate("/movies")}
+          className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+          onClick={() => navigate("/allMovies")}
         >
           See All Movies
         </button>

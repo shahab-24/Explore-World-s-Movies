@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import Swal from "sweetalert2"; // Import SweetAlert2
 import { AuthContext } from "../Provider/AuthProvider";
 
 const AddMovie = () => {
-	const {user, setUser} = useContext(AuthContext);
+	const {user} = useContext(AuthContext);
   const [movie, setMovie] = useState({
     poster: "",
     title: "",
-    genre: "",
+    genre: [],
     duration: "",
     releaseYear: "",
     rating: 0,
@@ -21,6 +21,11 @@ const AddMovie = () => {
     setMovie({ ...movie, [name]: value });
   };
 
+  const handleGenreChange = (event) => {
+    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+    setMovie({ ...movie, genre: selectedOptions });
+  };
+
   // Handle rating
   const handleRating = (rate) => {
     setMovie({ ...movie, rating: rate });
@@ -29,6 +34,7 @@ const AddMovie = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    const movieUser = {...movie, email: user?.email}
 
     // Validation
     if (!movie.poster.startsWith("http")) {
@@ -92,7 +98,7 @@ const AddMovie = () => {
     fetch("http://localhost:3000/movies", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(movie),
+      body: JSON.stringify(movieUser),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -105,7 +111,7 @@ const AddMovie = () => {
           setMovie({
             poster: "",
             title: "",
-            genre: "",
+            genre: [],
             duration: "",
             releaseYear: "",
             rating: 0,
@@ -148,7 +154,7 @@ const AddMovie = () => {
         <select
           name="genre"
           value={movie.genre}
-          onChange={handleChange}
+          onChange={handleGenreChange}
           className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">Select Genre</option>
@@ -157,6 +163,7 @@ const AddMovie = () => {
           <option value="Horror">Horror</option>
           <option value="Action">Action</option>
           <option value="Romance">Romance</option>
+          <option value="History">History</option>
         </select>
 
         {/* Duration */}
@@ -183,6 +190,9 @@ const AddMovie = () => {
           <option value="2023">2023</option>
           <option value="2022">2022</option>
           <option value="2021">2021</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2010">2010</option>
         </select>
 
         {/* Rating */}
