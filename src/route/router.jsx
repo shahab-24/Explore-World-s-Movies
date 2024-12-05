@@ -8,6 +8,7 @@ import MyFavourites from "../Pages/MyFavourites";
 import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Home";
 import FeaturedMovies from "../Components/FeaturedMovies";
+import MovieDetails from "../Pages/MovieDetails";
 
 
 
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
 		{
 			path: "/featured-movies",
 			element: <FeaturedMovies></FeaturedMovies>
+		}
+		,{
+			path: "/movies/:id",
+			element: <MovieDetails></MovieDetails>,
+			loader: ({params}) => fetch(`http://localhost:3000/movies/${params.id}`)
 		}
 
 		]  
