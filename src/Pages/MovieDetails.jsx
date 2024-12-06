@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const MovieDetails = () => {
@@ -97,6 +97,11 @@ const MovieDetails = () => {
             >
               Delete Movie
             </button>
+            <Link to={`/updateMovie/${id}`}>
+            <button>
+              Update Movie
+            </button>
+            </Link>
             <button
               className="btn btn-success"
               onClick={handleAddToFavorites}
@@ -106,7 +111,7 @@ const MovieDetails = () => {
           </div>
           <button
             className="btn btn-secondary mt-4"
-            onClick={() => navigate(location.state?.from || "/all-movies")}
+            onClick={() => navigate(location.state?.from || "/allMovies")}
           >
             Back
           </button>

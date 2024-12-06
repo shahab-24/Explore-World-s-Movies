@@ -1,16 +1,16 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 
 const Header = () => {
-	const {user, setUser, userLogOut} = useContext(AuthContext)
+	const {user, userLogOut} = useContext(AuthContext)
 	const links = <>
-	<li><NavLink to='/'>Home</NavLink></li>
-	<li><NavLink to='/allMovies'>All Movies</NavLink></li>
-	<li><NavLink to='/addMovie'>Add Movie</NavLink></li>
-	<li><NavLink to='/favouriteMovies'>My Favourites</NavLink></li>
-	<li><NavLink to='/signup'>Register</NavLink></li>
+	<li><NavLink to='/'  activeClassName="active">Home</NavLink></li>
+	<li><NavLink to='/allMovies'  activeClassName="active">All Movies</NavLink></li>
+	<li><NavLink to='/addMovie'  activeClassName="active">Add Movie</NavLink></li>
+	<li><NavLink to='/favouriteMovies'  activeClassName="active">My Favourites</NavLink></li>
+	<li><NavLink to='/signup'  activeClassName="active">Register</NavLink></li>
 	{!user && (
         <>
           <li>
