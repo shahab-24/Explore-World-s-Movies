@@ -92,18 +92,18 @@ const MovieDetails = () => {
           <p className="mt-4">{movie.summary}</p>
           <div className="card-actions justify-between mt-4">
             <button
-              className="btn btn-error"
+              className="btn btn-error btn-outline"
               onClick={handleDelete}
             >
-              Delete Movie
+              Delete
             </button>
             <Link to={`/updateMovie/${id}`}>
-            <button>
+            <button className="btn btn-outline">
               Update Movie
             </button>
             </Link>
             <button
-              className="btn btn-success"
+              className="btn btn-success btn-outline"
               onClick={handleAddToFavorites}
             >
               Add to Favorite

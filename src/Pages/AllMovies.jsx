@@ -62,12 +62,14 @@ const AllMovies = () => {
               Rating: {movie.rating}⭐
             </p>
             {/* See Details Button */}
+            <div className="">
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center border-2  w-full"
               onClick={() => navigate(`/movies/${movie._id}`)}
             >
               See Details
             </button>
+            </div>
           </div>
         ))}
       </div>
