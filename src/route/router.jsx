@@ -12,6 +12,8 @@ import MovieDetails from "../Pages/MovieDetails";
 import FavouriteMovies from "../Pages/FavouriteMovies";
 
 import UpdateMovie from "../Components/UpdateMovie";
+import PrivateRoute from "../Components/PrivateRoute";
+import About from "../Pages/About";
 
 
 
@@ -21,7 +23,7 @@ const router = createBrowserRouter([
 		element: <HomeLayout></HomeLayout>,
 		children:[{
 			path: "/addMovie",
-		element: <AddMovie></AddMovie>
+		element:<PrivateRoute> <AddMovie></AddMovie></PrivateRoute>
 		},
 		{
 			path:'/',
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
 		},
 		{
 			path:"/favouriteMovies",
-			element: <FavouriteMovies></FavouriteMovies>
+			element: <PrivateRoute><FavouriteMovies></FavouriteMovies></PrivateRoute>
 		},
 		{
 			path: "/login",
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
 		{
 			path: "/updateMovie/:id",
 			element: <UpdateMovie></UpdateMovie>
+		},
+		{
+			path: '/signup',
+			element: <Signup></Signup>
+		},
+		{
+			path: '/about',
+			element: <About></About>
 		}
 
 		]  
@@ -62,10 +72,7 @@ const router = createBrowserRouter([
 		
 	},
 	
-	{
-		path: '/signup',
-		element: <Signup></Signup>
-	},
+	
 	{
 		path:'*',
 		element: <NotFound></NotFound>

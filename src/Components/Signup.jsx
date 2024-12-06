@@ -72,7 +72,7 @@ const Signup = () => {
 
   return (
     <div
-      className="flex justify-center items-center min-h-screen bg-cover bg-center"
+      className="flex justify-center items-center min-h-screen bg-cover bg-center py-10"
       style={{
         backgroundImage: "url('https://i.ibb.co/6R51DRP/marldive-water-2.jpg')",
       }}

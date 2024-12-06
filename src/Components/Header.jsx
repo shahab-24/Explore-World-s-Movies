@@ -8,14 +8,22 @@ const Header = () => {
 	const links = <>
 	<li><NavLink to='/'  activeClassName="active">Home</NavLink></li>
 	<li><NavLink to='/allMovies'  activeClassName="active">All Movies</NavLink></li>
-	<li><NavLink to='/addMovie'  activeClassName="active">Add Movie</NavLink></li>
-	<li><NavLink to='/favouriteMovies'  activeClassName="active">My Favourites</NavLink></li>
-	<li><NavLink to='/signup'  activeClassName="active">Register</NavLink></li>
+  {
+    user && (
+      <>
+      <li><NavLink to='/addMovie'  activeClassName="active">Add Movie</NavLink></li>
+      <li><NavLink to='/favouriteMovies'  activeClassName="active">My Favourites</NavLink></li></>
+    )
+  }
+  <li>
+    <NavLink to='/about'>About</NavLink>
+  </li>
+	
+	
 	{!user && (
         <>
-          <li>
-            <NavLink to="/login" activeClassName="active">Login</NavLink>
-          </li>
+        
+        
           <li>
             <NavLink to="/signup" activeClassName="active">Register</NavLink>
           </li>
