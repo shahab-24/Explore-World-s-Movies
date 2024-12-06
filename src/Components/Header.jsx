@@ -9,7 +9,7 @@ const Header = () => {
 	<li><NavLink to='/'>Home</NavLink></li>
 	<li><NavLink to='/allMovies'>All Movies</NavLink></li>
 	<li><NavLink to='/addMovie'>Add Movie</NavLink></li>
-	<li><NavLink to='/myFavourites'>My Favourites</NavLink></li>
+	<li><NavLink to='/favouriteMovies'>My Favourites</NavLink></li>
 	<li><NavLink to='/signup'>Register</NavLink></li>
 	{!user && (
         <>

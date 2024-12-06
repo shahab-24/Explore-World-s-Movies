@@ -4,11 +4,12 @@ import Login from "../Components/Login";
 import Signup from "../Components/Signup";
 import AddMovie from "../Pages/AddMovie";
 import AllMovies from "../Pages/AllMovies";
-import MyFavourites from "../Pages/MyFavourites";
+
 import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Home";
 import FeaturedMovies from "../Components/FeaturedMovies";
 import MovieDetails from "../Pages/MovieDetails";
+import FavouriteMovies from "../Pages/FavouriteMovies";
 
 
 
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
 			element: <AllMovies></AllMovies>
 		},
 		{
-			path:"/myFavourites",
-			element: <MyFavourites></MyFavourites>
+			path:"/favouriteMovies",
+			element: <FavouriteMovies></FavouriteMovies>
 		},
 		{
 			path: "/login",
