@@ -3,23 +3,47 @@ import { useNavigate } from "react-router-dom";
 
 const AllMovies = () => {
   const [movies, setMovies] = useState([]); // State to store movies
+  const [searchText, setSearchText] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const navigate = useNavigate(); // To navigate to the details page
 
   // Fetch all movies from the backend
   useEffect(() => {
     fetch("http://localhost:3000/movies") // Replace with your backend URL
       .then((res) => res.json())
-      .then((data) => setMovies(data))
+      .then((data) =>{
+        setMovies(data);
+        setFilteredMovies(data);   //initially show all movies
+      })
       .catch((error) => console.error("Error fetching movies:", error));
   }, []);
 
+
+  const handleSearch=e=> {
+    const text = e.target.value.toLowerCase();
+    setSearchText(text);
+
+    const filtered = movies.filter((movie) => movie.title.toLowerCase().includes(text))
+
+    setFilteredMovies(filtered)
+  }
   return (
     <div className="container mx-auto py-8">
       <h2 className="text-3xl font-bold text-center mb-6">All Movies</h2>
 
+      <div className="mb-4">
+        <input
+          type="text"
+          value={searchText}
+          onChange={handleSearch}
+          placeholder="Search movies by title..."
+          className="w-full p-2 border rounded"
+        />
+      </div>
+
       {/* Movies Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {movies.map((movie) => (
+        {filteredMovies.map((movie) => (
           <div key={movie._id} className="bg-white rounded shadow-lg p-4">
             {/* Movie Poster */}
             <img
