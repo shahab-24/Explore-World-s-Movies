@@ -19,6 +19,27 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+  
+    if (!email || !password) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill in both email and password fields.",
+      });
+      return;
+    }
+
+  
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Email",
+        text: "Please enter a valid email address.",
+      });
+      return;
+    }
+
     setErr("");
     userLogin(email, password)
       .then((result) => {

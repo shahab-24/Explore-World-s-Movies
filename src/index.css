@@ -9,3 +9,119 @@ a.active {
 	font-size: larger;
 	color: blueviolet;
   }
+/* Left Slide (Small Image on Left with Fade-Out) */
+.left-slide {
+	transform: translateX(-150%) scale(0.8);
+	opacity: 0.3; /* Faded */
+	z-index: 1;
+	transition: all 0.7s ease-in-out;
+  }
+  
+  /* Center Slide (Large Image in Center with Zoom-In and Floating Effect) */
+  .center-slide {
+	transform: translateX(0%) scale(1.2);
+	opacity: 1;
+	z-index: 10;
+	animation: floating 3s infinite ease-in-out; /* Floating Animation */
+	transition: all 0.7s ease-in-out;
+  }
+  
+  /* Right Slide (Small Image on Right with Fade-Out) */
+  .right-slide {
+	transform: translateX(150%) scale(0.8);
+	opacity: 0.3; /* Faded */
+	z-index: 1;
+	transition: all 0.7s ease-in-out;
+  }
+  
+  /* Hidden Slide (Not Visible) */
+  .hidden-slide {
+	opacity: 0;
+	z-index: 0;
+  }
+  
+  /* Floating Animation */
+  @keyframes floating {
+	0% {
+	  transform: translateY(0) scale(1.2);
+	}
+	50% {
+	  transform: translateY(-10px) scale(1.2); /* Slightly moves up */
+	}
+	100% {
+	  transform: translateY(0) scale(1.2);
+	}
+  }
+
+  
+
+  /* featured movies */
+
+  /* Floating Animation */
+@keyframes float-1 {
+	0% {
+	  transform: translateY(0);
+	}
+	50% {
+	  transform: translateY(-10px);
+	}
+	100% {
+	  transform: translateY(0);
+	}
+  }
+  
+  @keyframes float-2 {
+	0% {
+	  transform: translateY(0);
+	}
+	50% {
+	  transform: translateY(10px);
+	}
+	100% {
+	  transform: translateY(0);
+	}
+  }
+  
+  @keyframes float-3 {
+	0% {
+	  transform: translateY(0);
+	}
+	50% {
+	  transform: translateY(-5px);
+	}
+	100% {
+	  transform: translateY(0);
+	}
+  }
+  
+  /* Floating Animation Classes */
+  .animate-float-0 {
+	animation: float-1 4s ease-in-out infinite;
+  }
+  
+  .animate-float-1 {
+	animation: float-2 4s ease-in-out infinite;
+  }
+  
+  .animate-float-2 {
+	animation: float-3 4s ease-in-out infinite;
+  }
+  
+  /* Hover Effect for Cards */
+  .hover:scale-105 {
+	transform: scale(1.05);
+	box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+/* Floating Effect */
+@keyframes float {
+	0% {
+	  transform: translateY(0);
+	}
+	50% {
+	  transform: translateY(-10px); /* Adjust the value for how much you want it to float */
+	}
+	100% {
+	  transform: translateY(0);
+	}
+  }
+  

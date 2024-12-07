@@ -20,22 +20,36 @@ const Signup = () => {
     const photo = form.photo.value;
     const password = form.password.value;
 
+
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
-    if (!passwordRegex.test(password)) {
-      setErr(
-        "Password must be at least 6 characters, include uppercase, lowercase, number, and a special character."
-      );
+
+    if (!name || !email || !photo || !password) {
+      Swal.fire({
+        icon: "warning",
+        title: "Validation Failed",
+        text: "All fields are required.",
+      });
       return;
     }
 
-    setErr("");
+    if (!passwordRegex.test(password)) {
+      Swal.fire({
+        icon: "warning",
+        title: "Invalid Password",
+        text:
+          "Password must be at least 6 characters, include uppercase, lowercase, number, and a special character.",
+      });
+      return;
+    }
+
+    setErr(""); 
 
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        fetch("http://localhost:3000/users", {
+        fetch("https://explore-world-movies-server.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

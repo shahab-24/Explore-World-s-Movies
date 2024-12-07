@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AllMovies = () => {
-  const [movies, setMovies] = useState([]); // State to store movies
+  const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const navigate = useNavigate(); // To navigate to the details page
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-  // Fetch all movies from the backend
   useEffect(() => {
-    fetch("http://localhost:3000/movies") // Replace with your backend URL
+    fetch("https://explore-world-movies-server.vercel.app/movies")
       .then((res) => res.json())
-      .then((data) =>{
+      .then((data) => {
         setMovies(data);
-        setFilteredMovies(data);   //initially show all movies
+        setIsLoading(false); 
       })
       .catch((error) => console.error("Error fetching movies:", error));
   }, []);
 
+  const handleSearch = (e) => {
+    setSearchText(e.target.value.toLowerCase());
+  };
 
-  const handleSearch=e=> {
-    const text = e.target.value.toLowerCase();
-    setSearchText(text);
+  const filteredMovies = useMemo(() => {
+    return movies.filter((movie) =>
+      movie.title.toLowerCase().includes(searchText)
+    );
+  }, [movies, searchText]);
 
-    const filtered = movies.filter((movie) => movie.title.toLowerCase().includes(text))
-
-    setFilteredMovies(filtered)
-  }
   return (
     <div className="container mx-auto py-8">
       <h2 className="text-3xl font-bold text-center mb-6">All Movies</h2>
@@ -41,37 +41,54 @@ const AllMovies = () => {
         />
       </div>
 
-      {/* Movies Grid */}
+    
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredMovies.map((movie) => (
-          <div key={movie._id} className="bg-white rounded shadow-lg p-4">
-            {/* Movie Poster */}
-            <img
-              src={movie.poster}
-              alt={movie.title}
-              className="w-full h-[200px] object-cover rounded mb-4"
-            />
-            {/* Movie Info */}
-            <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
-            <p className="text-gray-600 mb-1">Genre: {movie.genre}</p>
-            <p className="text-gray-600 mb-1">Duration: {movie.duration} min</p>
-            <p className="text-gray-600 mb-1">
-              Release Year: {movie.releaseYear}
-            </p>
-            <p className="text-yellow-500 font-semibold mb-2">
-              Rating: {movie.rating}⭐
-            </p>
-            {/* See Details Button */}
-            <div className="">
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center border-2  w-full"
-              onClick={() => navigate(`/movies/${movie._id}`)}
-            >
-              See Details
-            </button>
-            </div>
-          </div>
-        ))}
+        {isLoading
+          ? Array(6)
+              .fill(0)
+              .map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded shadow-lg p-4 skeleton animate-pulse"
+                >
+                  
+                  <div className="skeleton h-[200px] mb-4" />
+                  <div className="skeleton h-6 mb-2" /> 
+                  <div className="skeleton h-4 mb-2" /> 
+                  <div className="skeleton h-4 mb-2" /> 
+                  <div className="skeleton h-4 mb-4" /> 
+                  <div className="skeleton h-4 mb-2" />
+                </div>
+              ))
+          : filteredMovies.map((movie) => (
+              <div key={movie._id} className="bg-white rounded shadow-lg p-4">
+                {/* Movie Poster */}
+                <img
+                  src={movie.poster}
+                  alt={movie.title}
+                  className="w-full h-[200px] object-cover rounded mb-4"
+                />
+                {/* Movie Info */}
+                <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
+                <p className="text-gray-600 mb-1">Genre: {movie.genre}</p>
+                <p className="text-gray-600 mb-1">Duration: {movie.duration} min</p>
+                <p className="text-gray-600 mb-1">
+                  Release Year: {movie.releaseYear}
+                </p>
+                <p className="text-yellow-500 font-semibold mb-2">
+                  Rating: {movie.rating}⭐
+                </p>
+                {/* See Details Button */}
+                <div className="">
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center border-2 w-full"
+                    onClick={() => navigate(`/movies/${movie._id}`)}
+                  >
+                    See Details
+                  </button>
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

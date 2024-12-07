@@ -15,75 +15,79 @@ import UpdateMovie from "../Components/UpdateMovie";
 import PrivateRoute from "../Components/PrivateRoute";
 import About from "../Pages/About";
 
-
-
 const router = createBrowserRouter([
-	{
-		path:"/",
-		element: <HomeLayout></HomeLayout>,
-		children:[{
-			path: "/addMovie",
-		element:<PrivateRoute> <AddMovie></AddMovie></PrivateRoute>
-		},
-		{
-			path:'/',
-			element: <Home></Home>
+  {
+    path: "/",
+    element: <HomeLayout></HomeLayout>,
+    children: [
+      {
+        path: "/addMovie",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AddMovie></AddMovie>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/allMovies",
+        element: <AllMovies></AllMovies>,
+      },
+      {
+        path: "/favouriteMovies",
+        element: (
+          <PrivateRoute>
+            <FavouriteMovies></FavouriteMovies>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/featured-movies",
+        element: <FeaturedMovies></FeaturedMovies>,
+      },
+      {
+        path: "/movies/:id",
+        element: <MovieDetails></MovieDetails>,
+        loader: ({ params }) =>
+          fetch(
+            `https://explore-world-movies-server.vercel.app/movies/${params.id}`
+          ),
+      },
+      {
+        path: "/updateMovie/:id",
+        element: <UpdateMovie></UpdateMovie>,
+      },
+      {
+        path: "/signup",
+        element: <Signup></Signup>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
+      },
+      {
+        path: "*",
+        element: <NotFound></NotFound>,
+      },
+    ],
+  },
 
-		},
-		{
-			path: "/allMovies",
-			element: <AllMovies></AllMovies>
-		},
-		{
-			path:"/favouriteMovies",
-			element: <PrivateRoute><FavouriteMovies></FavouriteMovies></PrivateRoute>
-		},
-		{
-			path: "/login",
-			element: <Login></Login>
-		},
-		{
-			path: "/featured-movies",
-			element: <FeaturedMovies></FeaturedMovies>
-		}
-		,{
-			path: "/movies/:id",
-			element: <MovieDetails></MovieDetails>,
-			loader: ({params}) => fetch(`http://localhost:3000/movies/${params.id}`)
-		},
-		{
-			path: "/updateMovie/:id",
-			element: <UpdateMovie></UpdateMovie>
-		},
-		{
-			path: '/signup',
-			element: <Signup></Signup>
-		},
-		{
-			path: '/about',
-			element: <About></About>
-		}
-
-		]  
-
-		
-			
-
-		
-	},
-	
-	
-	{
-		path:'*',
-		element: <NotFound></NotFound>
-	}
-	// {
-	// 	path: "/addMovie",
-	// 	element: <AddMovie></AddMovie>
-	// }
-  
-
-
+  {
+    path: "*",
+    element: <NotFound></NotFound>,
+  },
+  // {
+  // 	path: "/addMovie",
+  // 	element: <AddMovie></AddMovie>
+  // }
 ]);
 
 export default router;

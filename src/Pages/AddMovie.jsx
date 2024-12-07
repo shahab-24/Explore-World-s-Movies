@@ -1,10 +1,13 @@
-import { useContext, useState } from "react";
-import { Rating } from "react-simple-star-rating";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import { useContext, useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import "aos/dist/aos.css"; 
+import AOS from "aos";
+import ReactStars from "react-rating-stars-component"; 
 
 const AddMovie = () => {
-	const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
   const [movie, setMovie] = useState({
     poster: "",
     title: "",
@@ -15,28 +18,44 @@ const AddMovie = () => {
     summary: "",
   });
 
-  // Handle input changes
+  const [showGenreDropdown, setShowGenreDropdown] = useState(false);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 }); 
+  }, []);
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setMovie({ ...movie, [name]: value });
   };
 
-  const handleGenreChange = (event) => {
-    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-    setMovie({ ...movie, genre: selectedOptions });
+  
+  const handleGenreChange = (e) => {
+    const { value, checked } = e.target;
+    const selectedGenres = movie.genre;
+
+    if (checked) {
+      setMovie({ ...movie, genre: [...selectedGenres, value] });
+    } else {
+      setMovie({
+        ...movie,
+        genre: selectedGenres.filter((genre) => genre !== value),
+      });
+    }
   };
 
-  // Handle rating
-  const handleRating = (rate) => {
-    setMovie({ ...movie, rating: rate });
+
+  const handleRating = (newRating) => {
+    setMovie({ ...movie, rating: newRating });
   };
 
-  // Handle form submission
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const movieUser = {...movie, email: user?.email}
+    const movieUser = { ...movie, email: user?.email };
 
-    // Validation
+  
     if (!movie.poster.startsWith("http")) {
       Swal.fire({
         icon: "error",
@@ -45,57 +64,9 @@ const AddMovie = () => {
       });
       return;
     }
-    if (movie.title.length < 2) {
-      Swal.fire({
-        icon: "error",
-        title: "Invalid Title",
-        text: "Title must have at least 2 characters.",
-      });
-      return;
-    }
-    if (!movie.genre) {
-      Swal.fire({
-        icon: "error",
-        title: "Genre Required",
-        text: "Please select a genre.",
-      });
-      return;
-    }
-    if (movie.duration < 60) {
-      Swal.fire({
-        icon: "error",
-        title: "Invalid Duration",
-        text: "Duration must be at least 60 minutes.",
-      });
-      return;
-    }
-    if (!movie.releaseYear) {
-      Swal.fire({
-        icon: "error",
-        title: "Release Year Required",
-        text: "Please select a release year.",
-      });
-      return;
-    }
-    if (movie.rating <= 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Rating Required",
-        text: "Please provide a rating.",
-      });
-      return;
-    }
-    if (movie.summary.length < 10) {
-      Swal.fire({
-        icon: "error",
-        title: "Invalid Summary",
-        text: "Summary must have at least 10 characters.",
-      });
-      return;
-    }
 
-    // Submit data to server
-    fetch("http://localhost:3000/movies", {
+
+    fetch("https://explore-world-movies-server.vercel.app/movies", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(movieUser),
@@ -116,115 +87,170 @@ const AddMovie = () => {
             releaseYear: "",
             rating: 0,
             summary: "",
-          }); 
+          });
         }
       });
   };
 
+
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-800 py-6"
+    style={{
+      backgroundImage:
+        "url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }} >
+      <div  className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg bg-opacity-30">
       <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">
-        Add a New Movie
-      </h2>
-      <form onSubmit={handleSubmit}>
+      Add a New Movie
+    </h2>
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Poster URL */}
-        <label className="block mb-2 font-medium">Poster URL</label>
-        <input
-          type="text"
-          name="poster"
-          placeholder="Enter poster URL"
-          value={movie.poster}
-          onChange={handleChange}
-          className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <div data-aos="fade-right">
+          <label className="block mb-2 font-medium">Poster URL</label>
+          <input
+            type="text"
+            name="poster"
+            placeholder="Enter poster URL"
+            value={movie.poster}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
         {/* Movie Title */}
-        <label className="block mb-2 font-medium">Movie Title</label>
-        <input
-          type="text"
-          name="title"
-          placeholder="Enter movie title"
-          value={movie.title}
-          onChange={handleChange}
-          className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <div data-aos="fade-left">
+          <label className="block mb-2 font-medium">Movie Title</label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter movie title"
+            value={movie.title}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
         {/* Genre */}
+        <div className="mb-4 relative">
         <label className="block mb-2 font-medium">Genre</label>
-        <select
-          name="genre"
-          value={movie.genre}
-          onChange={handleGenreChange}
-          className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        <button
+          type="button"
+          onClick={() => setShowGenreDropdown(!showGenreDropdown)}
+          className="w-full p-3 border rounded bg-gray-100"
         >
-          <option value="">Select Genre</option>
-          <option value="Comedy">Comedy</option>
-          <option value="Drama">Drama</option>
-          <option value="Horror">Horror</option>
-          <option value="Action">Action</option>
-          <option value="Romance">Romance</option>
-          <option value="History">History</option>
-        </select>
+          Select Genre
+        </button>
+        {showGenreDropdown && (
+          <div className="absolute z-10 bg-white border rounded mt-2 w-full">
+            {["Action", "Drama", "Comedy", "Horror", "Romance", "Thriller"].map((genre) => (
+              <label key={genre} className="block px-4 py-2">
+                <input
+                  type="checkbox"
+                  value={genre}
+                  onChange={handleGenreChange}
+                  className="mr-2"
+                />
+                {genre}
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
+        {/* <div data-aos="fade-right" className="relative">
+          <label className="block mb-2 font-medium">Genre</label>
+          <button
+            type="button"
+            onClick={() => setShowGenreDropdown(!showGenreDropdown)}
+            className="w-full p-3 border border-gray-300 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Select Genre
+          </button>
+          {showGenreDropdown && (
+            <div className="absolute z-20 bg-gray-400 border border-gray-300 rounded mt-2 w-full">
+              {["Comedy", "Drama", "Horror", "Action", "Romance", "Thriller", "History"].map(
+                (genre) => (
+                  <label key={genre} className="block px-4 py-2">
+                    <input
+                      type="checkbox"
+                      value={genre}
+                      onChange={handleGenreChange}
+                      className="mr-2"
+                    />
+                    {genre}
+                  </label>
+                )
+              )}
+            </div>
+          )}
+        </div> */}
+
 
         {/* Duration */}
-        <label className="block mb-2 font-medium">Duration (in minutes)</label>
-        <input
-          type="number"
-          name="duration"
-          placeholder="Enter duration"
-          value={movie.duration}
-          onChange={handleChange}
-          className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <div data-aos="fade-left">
+          <label className="block mb-2 font-medium">Duration (in minutes)</label>
+          <input
+            type="number"
+            name="duration"
+            placeholder="Enter duration"
+            value={movie.duration}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
         {/* Release Year */}
-        <label className="block mb-2 font-medium">Release Year</label>
-        <select
-          name="releaseYear"
-          value={movie.releaseYear}
-          onChange={handleChange}
-          className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Select Year</option>
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
-          <option value="2022">2022</option>
-          <option value="2021">2021</option>
-          <option value="2015">2015</option>
-          <option value="2014">2014</option>
-          <option value="2010">2010</option>
-        </select>
+        <div data-aos="fade-right" className="">
+          <label className="block mb-2 font-medium">Release Year</label>
+          <select
+            name="releaseYear"
+            value={movie.releaseYear}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Year</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+        </div>
 
-        {/* Rating */}
-        
-        <label className="block mb-2 font-medium">Rating</label>
-        <div className="flex items-center mb-4">
-          <Rating
-            onClick={handleRating}
-            ratingValue={movie.rating}
-            size={25}
-            className="inline-block"
+        <div data-aos="fade-left">
+          <label className="block mb-2 font-medium">Rating</label>
+          <ReactStars
+            count={10}
+            onChange={handleRating}
+            size={30}
+            activeColor="#ffd700"
+            isHalf={true} 
           />
         </div>
 
         {/* Summary */}
-        <label className="block mb-2 font-medium">Summary</label>
-        <textarea
-          name="summary"
-          placeholder="Write a short summary"
-          value={movie.summary}
-          onChange={handleChange}
-          className="w-full p-3 mb-6 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        ></textarea>
+        <div data-aos="fade-right">
+          <label className="block mb-2 font-medium">Summary</label>
+          <textarea
+            name="summary"
+            placeholder="Write a short summary"
+            value={movie.summary}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+        </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full p-3 text-white bg-blue-600 rounded hover:bg-blue-700 transition"
-        >
-          Add Movie
-        </button>
+        <div data-aos="fade-up" className="col-span-1 md:col-span-2">
+          <button
+            type="submit"
+            className="w-full p-3 text-white bg-blue-600 rounded hover:bg-blue-700 transition"
+          >
+            Add Movie
+          </button>
+        </div>
       </form>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "aos/dist/aos.css";
+import "animate.css";
 
 const slides = [
   {
@@ -41,41 +42,50 @@ const slides = [
 ];
 
 const Banner = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 5000); // Change slide every 5 seconds
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 3000); 
     return () => clearInterval(interval);
   }, []);
 
+  const getPositionClass = (index) => {
+    const totalSlides = slides.length;
+    const position = (index - currentIndex + totalSlides) % totalSlides;
+
+    if (position === 0) return "left-slide fade-out"; 
+    if (position === 1) return "center-slide zoom-in floating"; 
+    if (position === 2) return "right-slide fade-out"; 
+    return "hidden-slide"; 
+  };
+
   return (
-    <div className="relative w-full h-[700px] overflow-hidden">
+    <div className="relative w-full h-[500px] overflow-hidden flex justify-center items-center">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+          className={`absolute transition-all duration-700 ease-in-out ${getPositionClass(
+            index
+          )}`}
         >
           <img
             src={slide.img}
             alt={slide.title}
-            className="w-full h-full object-cover"
+            className="object-cover rounded-lg shadow-lg w-[500px] h-[800px]"
           />
-          <div
-            className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white p-6"
-            data-aos="fade-up"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">{slide.title}</h1>
-            <p className="text-lg md:text-2xl">{slide.subtitle}</p>
-          </div>
+          {getPositionClass(index).includes("center-slide") && (
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center text-white text-center">
+              <h1 className="text-4xl font-bold animate__animated animate__fadeInDown">
+                {slide.title}
+              </h1>
+            </div>
+          )}
         </div>
       ))}
     </div>
   );
 };
-
 
 export default Banner;

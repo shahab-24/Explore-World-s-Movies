@@ -1,5 +1,4 @@
-// FeaturedMovies.jsx
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const FeaturedMovies = () => {
@@ -7,7 +6,7 @@ const FeaturedMovies = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/movies") // Replace with your backend URL
+    fetch("https://explore-world-movies-server.vercel.app/movies") 
       .then((res) => res.json())
       .then((data) => setMovies(data));
   }, []);
@@ -16,8 +15,12 @@ const FeaturedMovies = () => {
     <div className="container mx-auto py-8">
       <h2 className="text-3xl font-bold text-center mb-6">Featured Movies</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {movies.map((movie) => (
-          <div key={movie._id} className="bg-white rounded shadow-lg p-4">
+        {movies.map((movie, index) => (
+          <div
+            key={movie._id}
+            className={`bg-white rounded shadow-lg p-4 transition-transform duration-500 ease-in-out hover:scale-105 hover:shadow-2xl 
+            animate-float-${index % 3}`} 
+          >
             <img
               src={movie.poster}
               alt={movie.title}
@@ -26,8 +29,12 @@ const FeaturedMovies = () => {
             <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
             <p className="text-gray-600 mb-1">Genre: {movie.genre}</p>
             <p className="text-gray-600 mb-1">Duration: {movie.duration} min</p>
-            <p className="text-gray-600 mb-1">Release Year: {movie.releaseYear}</p>
-            <p className="text-yellow-500 font-semibold">Rating: {movie.rating}⭐</p>
+            <p className="text-gray-600 mb-1">
+              Release Year: {movie.releaseYear}
+            </p>
+            <p className="text-yellow-500 font-semibold">
+              Rating: {movie.rating}⭐
+            </p>
             <button
               className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
               onClick={() => navigate(`/movies/${movie._id}`)}
