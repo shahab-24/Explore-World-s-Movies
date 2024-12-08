@@ -50,6 +50,7 @@ const UpdateMovie = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log(result)
         if (result.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
@@ -187,6 +188,8 @@ const UpdateMovie = () => {
               <option value="2024">2024</option>
               <option value="2023">2023</option>
               <option value="2022">2022</option>
+              <option value="2022">2025</option>
+              <option value="2022">2026</option>
             </select>
             {errors.releaseYear && showError(errors.releaseYear.message)}
           </div>

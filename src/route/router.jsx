@@ -36,7 +36,8 @@ const router = createBrowserRouter([
       {
         path: "/allMovies",
         element: <AllMovies></AllMovies>,
-      },
+        // loader: () => fetch("https://explore-world-movies-server.vercel.app/allMovies")
+        },
       {
         path: "/favouriteMovies",
         element: (
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+    
       {
         path: "/login",
         element: <Login></Login>,

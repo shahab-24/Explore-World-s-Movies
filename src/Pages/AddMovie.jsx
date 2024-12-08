@@ -144,7 +144,7 @@ const AddMovie = () => {
         </button>
         {showGenreDropdown && (
           <div className="absolute z-10 bg-white border rounded mt-2 w-full">
-            {["Action", "Drama", "Comedy", "Horror", "Romance", "Thriller"].map((genre) => (
+            {["Action", "Drama", "Comedy", "Horror", "Romance", "Thriller", "History", "Mystery"].map((genre) => (
               <label key={genre} className="block px-4 py-2">
                 <input
                   type="checkbox"
@@ -158,34 +158,7 @@ const AddMovie = () => {
           </div>
         )}
       </div>
-        {/* <div data-aos="fade-right" className="relative">
-          <label className="block mb-2 font-medium">Genre</label>
-          <button
-            type="button"
-            onClick={() => setShowGenreDropdown(!showGenreDropdown)}
-            className="w-full p-3 border border-gray-300 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Select Genre
-          </button>
-          {showGenreDropdown && (
-            <div className="absolute z-20 bg-gray-400 border border-gray-300 rounded mt-2 w-full">
-              {["Comedy", "Drama", "Horror", "Action", "Romance", "Thriller", "History"].map(
-                (genre) => (
-                  <label key={genre} className="block px-4 py-2">
-                    <input
-                      type="checkbox"
-                      value={genre}
-                      onChange={handleGenreChange}
-                      className="mr-2"
-                    />
-                    {genre}
-                  </label>
-                )
-              )}
-            </div>
-          )}
-        </div> */}
-
+      
 
         {/* Duration */}
         <div data-aos="fade-left">
@@ -214,6 +187,8 @@ const AddMovie = () => {
             <option value="2023">2023</option>
             <option value="2022">2022</option>
             <option value="2021">2021</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
           </select>
         </div>
 

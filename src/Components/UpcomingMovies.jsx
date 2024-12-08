@@ -7,7 +7,7 @@ const UpcomingMovies = () => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
 
   useEffect(() => {
-    fetch("https://explore-world-movies-server.vercel.app/movies")
+    fetch("https://explore-world-movies-server.vercel.app/allMovies")
       .then((res) => res.json())
       .then((data) => {
         const currentYear = new Date().getFullYear()
