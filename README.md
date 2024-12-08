@@ -1,6 +1,6 @@
-#Explore World Movies
+**Explore World Movies
 
-#Live Link: 
+#Live Link: https://explore-world-movies.web.app/
 ##This project is a dynamic movie portal where users can explore, rate, and review movies. It includes features such as featured movies, movie details, search functionality, and more.
 
 #Features:
