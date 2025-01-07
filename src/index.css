@@ -124,4 +124,15 @@ a.active {
 	  transform: translateY(0);
 	}
   }
+/* 
+/* 
+bg-gradient-to-r from-indigo-900 via-purple-900 to-black text-white
+
+*//* Global background for the body */
+body {
+
+    color: #ffffff; /* Light text for contrast */
+    font-family: 'Poppins', sans-serif; /* Clean font */
+  }
+  
   

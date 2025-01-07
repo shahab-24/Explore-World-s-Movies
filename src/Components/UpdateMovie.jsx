@@ -1,17 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useState } from "react";
 
 const UpdateMovie = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { movie } = location.state || {};
-
-  const [loading, setLoading] = useState(true); 
-
+  const [loading, setLoading] = useState(true);
 
   const {
     register,
@@ -20,13 +17,11 @@ const UpdateMovie = () => {
     formState: { errors },
   } = useForm();
 
-
   useEffect(() => {
-    fetch(`https://explore-world-movies-server.vercel.app/movies/${id}`) 
+    fetch(`https://explore-world-movies-server.vercel.app/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setLoading(false); 
-    
+        setLoading(false);
         setValue("poster", data.poster);
         setValue("title", data.title);
         setValue("genre", data.genre);
@@ -36,12 +31,11 @@ const UpdateMovie = () => {
         setValue("summary", data.summary);
       })
       .catch((error) => {
-        setLoading(false); 
+        setLoading(false);
         console.error("Error fetching movie data:", error);
       });
   }, [id, setValue]);
 
-  // Handle form submission
   const onSubmit = (data) => {
     fetch(`https://explore-world-movies-server.vercel.app/updateMovie/${id}`, {
       method: "PUT",
@@ -50,7 +44,7 @@ const UpdateMovie = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result)
+        console.log(result);
         if (result.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
@@ -64,7 +58,6 @@ const UpdateMovie = () => {
       .catch((error) => console.error("Error updating movie:", error));
   };
 
-
   const showError = (message) => {
     Swal.fire({
       icon: "error",
@@ -73,7 +66,6 @@ const UpdateMovie = () => {
     });
   };
 
-  
   if (loading) {
     return (
       <div className="container mx-auto py-8 flex justify-center items-center">
@@ -89,21 +81,22 @@ const UpdateMovie = () => {
 
   return (
     <div
-      className="container mx-auto py-8"
+      className="container mx-auto py-8 flex justify-center items-center w-full"
       style={{
-        background: "linear-gradient(to right, #1e3c72, #2a5298)", 
+        backgroundImage: "url('https://plus.unsplash.com/premium_photo-1667538960183-82690c60a2a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dmludGFnZSUyMG1vdmllcyUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D')", // Replace with a real movie poster
+        backgroundSize: "cover",
+        backgroundPosition: "center",
         minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        animation: "fadeIn 2s ease-in-out",
+        
       }}
+    
     >
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">
+      <div className="bg-transparent p-8 rounded-lg shadow-lg w-full max-w-lg opacity-90 backdrop-blur-md animate__animated animate__fadeIn">
+        <h2 className="text-3xl font-bold text-center mb-6 text-blue-600 animate__animated animate__fadeIn animate__delay-1s">
           Update Movie
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 animate__animated animate__fadeIn animate__delay-2s text-fuchsia-600 ">
           <div>
             <label className="block mb-2 text-lg text-gray-700">Poster URL</label>
             <input
@@ -138,7 +131,6 @@ const UpdateMovie = () => {
             {errors.title && showError(errors.title.message)}
           </div>
 
-
           <div>
             <label className="block mb-2 text-lg text-gray-700">Genre</label>
             <select
@@ -155,7 +147,6 @@ const UpdateMovie = () => {
             {errors.genre && showError(errors.genre.message)}
           </div>
 
-    
           <div>
             <label className="block mb-2 text-lg text-gray-700">Duration (in minutes)</label>
             <input
@@ -175,7 +166,6 @@ const UpdateMovie = () => {
             {errors.duration && showError(errors.duration.message)}
           </div>
 
-
           <div>
             <label className="block mb-2 text-lg text-gray-700">Release Year</label>
             <select
@@ -188,13 +178,10 @@ const UpdateMovie = () => {
               <option value="2024">2024</option>
               <option value="2023">2023</option>
               <option value="2022">2022</option>
-              <option value="2022">2025</option>
-              <option value="2022">2026</option>
             </select>
             {errors.releaseYear && showError(errors.releaseYear.message)}
           </div>
 
-      
           <div>
             <label className="block mb-2 text-lg text-gray-700">Rating</label>
             <input
@@ -218,7 +205,6 @@ const UpdateMovie = () => {
             {errors.rating && showError(errors.rating.message)}
           </div>
 
-      
           <div>
             <label className="block mb-2 text-lg text-gray-700">Summary</label>
             <textarea
@@ -237,11 +223,11 @@ const UpdateMovie = () => {
             {errors.summary && showError(errors.summary.message)}
           </div>
 
-  
           <div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out"
+              className="mt-3 sm:mt-4 bg-gradient-to-r from-indigo-900 via-purple-800 to-black text-white px-3 sm:px-4 py-2 rounded w-full hover:bg-blue-600 ease-in-out transition duration-300 "
+            
             >
               Update Movie
             </button>

@@ -3,6 +3,9 @@ import Banner from "../Components/Banner";
 import FeaturedMovies from "../Components/FeaturedMovies";
 import TopRatedMovies from "../Components/TopRatedMovies";
 import UpcomingMovies from "../Components/UpcomingMovies";
+import Genre from "../Components/Genre";
+import NewsLetterSection from "../Components/NewsLetterSection";
+import BlogSection from "../Components/BlogSection";
 
 const Home = () => {
   const [theme, setTheme] = useState("light");
@@ -62,7 +65,7 @@ const Home = () => {
       <div className="text-end my-2">
         <input onClick={toggleTheme} type="checkbox" className="toggle" defaultChecked />
       </div>
-      <h1 className="text-3xl font-bold text-center mb-6">Welcome to Movie Portal</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 text-fuchsia-700">Welcome to Movie Portal</h1>
 	  <Banner></Banner>
 
       <div>
@@ -88,7 +91,12 @@ const Home = () => {
           <UpcomingMovies />
         )}
       </div>
+
+      <Genre></Genre>
+      <BlogSection></BlogSection>
+      <NewsLetterSection></NewsLetterSection>
     </div>
+    
   );
 };
 

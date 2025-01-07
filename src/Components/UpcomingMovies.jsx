@@ -26,7 +26,7 @@ const UpcomingMovies = () => {
   return (
     <div>
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-4 text-center">Upcoming Movies</h2>
+        <h2 className="md:text-4xl text-3xl font-bold mb-4 text-center text-fuchsia-700">Upcoming Movies</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {upcomingMovies.length > 0 ? (
             upcomingMovies.map((movie, index) => (
@@ -54,18 +54,18 @@ const UpcomingMovies = () => {
                   className="w-full h-[200px] object-cover rounded mb-4"
                 />
     
-                <h3 className="text-xl font-semibold mb-2">{movie.title}</h3>
-                <p className="text-gray-600 mb-1">Genre: {movie.genre}</p>
+                <h3 className="text-xl font-semibold mb-2 text-fuchsia-600">{movie.title}</h3>
+                <p className="text-gray-600 mb-1">{movie.genre}</p>
                 <p className="text-gray-600 mb-1">
-                  Release Year: {movie.releaseYear}
+                  {movie.releaseYear}
                 </p>
                 <p className="text-yellow-500 font-semibold mb-2">
-                  Rating: {movie.rating}⭐
+                  {movie.rating}⭐
                 </p>
               </div>
             ))
           ) : (
-            <p className="text-gray-500 text-center">No upcoming movies till now.....</p>
+            <p className="text-center text-fuchsia-700">No upcoming movies till now.....</p>
           )}
         </div>
       </section>

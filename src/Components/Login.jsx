@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 const Login = () => {
-  const { userLogin, setUser } = useContext(AuthContext);
+  const { userLogin, setUser,handleGoogleLogin } = useContext(AuthContext);
   const [err, setErr] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -80,7 +80,7 @@ const Login = () => {
       }}
     >
       <div
-        className="card relative z-10 py-10 max-w-lg w-full shadow-2xl p-10"
+        className="card relative z-10 py-10 max-w-lg w-full shadow-2xl p-10 text-gray-400"
         style={{
           backgroundColor: "rgba(255, 255, 255, 0.8)",
           backdropFilter: "blur(10px)",
@@ -122,7 +122,7 @@ const Login = () => {
             <button
               type="button"
               onClick={handleShowPassword}
-              className="absolute right-4 top-16 text-black"
+              className="absolute right-4 top-14 text-black"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -138,7 +138,21 @@ const Login = () => {
           </p>
           {err && <p className="text-red-700 mt-2">{err}</p>}
         </form>
+        <div className="mt-6 flex flex-col items-center gap-4">
+          <button
+            onClick={handleGoogleLogin}
+            className="btn btn-outline w-full flex items-center gap-2"
+          >
+            Login with Google
+            <img
+              src="https://img.icons8.com/color/48/google-logo.png"
+              alt="Google"
+              className="w-6"
+            />
+          </button>
+        </div>
       </div>
+     
     </div>
   );
 };

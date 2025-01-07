@@ -1,91 +1,82 @@
 import { useState, useEffect } from "react";
 import "aos/dist/aos.css";
 import "animate.css";
+import { useNavigate } from "react-router-dom";
 
 const slides = [
   {
-    id: 1,
-    title: "Discover Amazing Movies",
-    subtitle: "Explore the world of cinema with the best-rated movies.",
-    img: "https://i.ibb.co.com/gPTHcBH/2.jpg",
+    title: "Avengers: Endgame",
+    genre: "Action, Adventure, Drama",
+    release_year: 2019,
+    rating: "PG-13",
+    duration: "181 min",
+    img: "https://www.themoviedb.org/t/p/original/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
   },
   {
-    id: 2,
-    title: "Stream Anytime, Anywhere",
-    subtitle: "Your favorite movies, now at your fingertips.",
-    img: "https://i.ibb.co.com/fFLZXzq/stream.webp",
-  },
-  {
-    id: 3,
-    title: "Join the Movie Lovers Community",
-    subtitle: "Rate and review movies with fellow enthusiasts.",
-    img: "https://i.ibb.co.com/pQggzBJ/love.jpg",
-  },
-  {
-    id: 4,
-    title: "Experience Blockbuster Hits",
-    subtitle: "Catch the latest and greatest in the movie industry.",
-    img: "https://i.ibb.co.com/vPrFh7Q/5.jpg",
-  },
-  {
-    id: 5,
-    title: "Award-Winning Masterpieces",
-    subtitle: "Watch critically acclaimed films from around the world.",
-    img: "https://i.ibb.co.com/fx4nSpf/dirilis.jpg",
-  },
-  {
-    id: 6,
-    title: "Unleash Your Imagination",
-    subtitle: "Dive into movies that inspire and entertain.",
-    img: "https://i.ibb.co.com/dPGGtV3/imagination.jpg",
+    title: "The Dark Knight",
+    genre: "Action, Crime, Drama",
+    release_year: 2008,
+    rating: "PG-13",
+    duration: "152 min",
+    img: "https://www.themoviedb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
   },
 ];
-
 const Banner = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 3000); 
-    return () => clearInterval(interval);
-  }, []);
-
-  const getPositionClass = (index) => {
-    const totalSlides = slides.length;
-    const position = (index - currentIndex + totalSlides) % totalSlides;
-
-    if (position === 0) return "left-slide fade-out"; 
-    if (position === 1) return "center-slide zoom-in floating"; 
-    if (position === 2) return "right-slide fade-out"; 
-    return "hidden-slide"; 
-  };
-
-  return (
-    <div className="relative w-full h-[500px] overflow-hidden flex justify-center items-center">
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute transition-all duration-700 ease-in-out ${getPositionClass(
-            index
-          )}`}
-        >
-          <img
-            src={slide.img}
-            alt={slide.title}
-            className="object-cover rounded-lg shadow-lg w-[500px] h-[800px]"
-          />
-          {getPositionClass(index).includes("center-slide") && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center text-white text-center">
-              <h1 className="text-4xl font-bold animate__animated animate__fadeInDown">
-                {slide.title}
-              </h1>
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate()
+  
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+      }, 5000); // Slide changes every 5 seconds
+      return () => clearInterval(interval);
+    }, []);
+  
+    const getSlideStyles = (index) => {
+      const totalSlides = slides.length;
+      const position = (index - currentIndex + totalSlides) % totalSlides;
+  
+      if (position === 0) return "z-10 opacity-100 scale-100"; // Active slide
+      if (position === 1) return "z-0 opacity-50 scale-95"; // Next slide
+      return "hidden"; // Other slides
+    };
+  
+    return (
+      <div className="relative w-full h-[70vh] overflow-hidden">
+        {/* Cinematic Background Image with Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-75"></div>
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-all duration-700 ease-in-out transform ${getSlideStyles(
+              index
+            )}`}
+          >
+            <div className="h-full w-full flex justify-center items-center">
+              <div className="w-full h-full aspect-[16/9] overflow-hidden">
+                <img
+                  src={slide.img}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default Banner;
+            {getSlideStyles(index).includes("opacity-100") && (
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center px-6 py-10">
+                <h1 className="text-5xl font-bold animate__animated animate__fadeInDown mb-4 text-shadow-md">
+                  {slide.title}
+                </h1>
+                <p className="text-lg animate__animated animate__fadeInUp text-shadow-md">
+                  {slide.genre} | {slide.release_year} | {slide.duration}
+                </p>
+                <button  onClick={() => navigate("/allMovies")} className="mt-6 px-8 py-3 bg-red-600 rounded-full text-lg font-semibold hover:bg-red-700 transition ease-in-out duration-300">
+                  Explore Now
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    );
+  };
+  export default Banner;

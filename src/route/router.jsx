@@ -14,6 +14,7 @@ import FavouriteMovies from "../Pages/FavouriteMovies";
 import UpdateMovie from "../Components/UpdateMovie";
 import PrivateRoute from "../Components/PrivateRoute";
 import About from "../Pages/About";
+import Contact from "../Pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
       {
         path: "*",

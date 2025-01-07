@@ -60,6 +60,7 @@ const Signup = () => {
           .then(() => manageUpdateProfile(name, photo));
 
         setUser(user);
+        navigate("/");
 
         Swal.fire({
           position: "top-center",
@@ -68,7 +69,7 @@ const Signup = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+    
       })
       .catch((error) => {
         Swal.fire({
@@ -92,7 +93,7 @@ const Signup = () => {
       }}
     >
       <div
-        className="bg-white bg-opacity-90 shadow-lg p-8 rounded-lg max-w-lg w-full z-20"
+        className="bg-base text-gray-600 bg-opacity-90 shadow-lg p-8 rounded-lg max-w-lg w-full z-20"
         style={{ backdropFilter: "blur(10px)" }}
       >
         <h2 className="font-bold text-center text-purple-700 text-3xl mb-4">
@@ -158,7 +159,7 @@ const Signup = () => {
             type="submit"
             className="btn btn-primary w-full mt-4 text-white font-semibold"
           >
-            Sign Up
+            Register
           </button>
           {err && <p className="text-red-600 mt-2">{err}</p>}
         </form>

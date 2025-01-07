@@ -5,21 +5,21 @@ import Swal from "sweetalert2";
 
 const MovieDetails = () => {
   const { user } = useContext(AuthContext);
-  const { id } = useParams(); 
-  const [movie, setMovie] = useState(null); 
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
 
   useEffect(() => {
-    fetch(`https://explore-world-movies-server.vercel.app/movies/${id}`) 
+    fetch(`https://explore-world-movies-server.vercel.app/movies/${id}`)
       .then((res) => res.json())
       .then((data) => setMovie(data))
       .catch((error) => console.error("Error fetching movie details:", error));
   }, [id]);
 
   const handleImageLoad = () => {
-    setImageLoaded(true); 
+    setImageLoaded(true);
   };
 
   const handleDelete = () => {
@@ -39,7 +39,7 @@ const MovieDetails = () => {
           .then((data) => {
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "The movie has been deleted.", "success");
-              navigate("/allMovies"); 
+              navigate("/allMovies");
             }
           })
           .catch((error) => {
@@ -52,7 +52,7 @@ const MovieDetails = () => {
 
   const handleAddToFavorites = () => {
     const favoriteMovie = {
-      email: user.email, 
+      email: user.email,
       poster: movie.poster,
       title: movie.title,
       genre: movie.genre,
@@ -83,14 +83,14 @@ const MovieDetails = () => {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="card w-full lg:w-1/2 mx-auto bg-base-100 shadow-xl">
-          <figure className="skeleton bg-gray-300 w-full h-72"></figure> 
+          <figure className="skeleton bg-gray-300 w-full h-72"></figure>
           <div className="card-body">
             <h2 className="skeleton w-1/2 h-6 bg-gray-300"></h2>
             <p className="skeleton w-1/4 h-4 bg-gray-300"></p>
-            <p className="skeleton w-1/4 h-4 bg-gray-300"></p> 
-            <p className="skeleton w-1/4 h-4 bg-gray-300"></p> 
-            <p className="skeleton w-1/4 h-4 bg-gray-300"></p> 
-            <p className="skeleton w-full h-12 bg-gray-300"></p> 
+            <p className="skeleton w-1/4 h-4 bg-gray-300"></p>
+            <p className="skeleton w-1/4 h-4 bg-gray-300"></p>
+            <p className="skeleton w-1/4 h-4 bg-gray-300"></p>
+            <p className="skeleton w-full h-12 bg-gray-300"></p>
           </div>
         </div>
       </div>
@@ -98,21 +98,21 @@ const MovieDetails = () => {
   }
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 bg-blue-50">
       <div className="card w-full lg:w-1/2 mx-auto bg-base-100 shadow-xl">
         <figure>
           {!imageLoaded && (
-            <div className="skeleton bg-gray-300 w-full h-72"></div> 
+            <div className="skeleton bg-gray-300 w-full h-72"></div>
           )}
           <img
             src={movie.poster}
             alt={movie.title}
-            className={`w-full h-72 object-cover ${imageLoaded ? "" : "hidden"}`} 
-            onLoad={handleImageLoad} 
+            className={`w-full h-72 object-cover ${imageLoaded ? "" : "hidden"}`}
+            onLoad={handleImageLoad}
           />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title text-2xl font-bold">
+        <div className="card-body text-black">
+          <h2 className="card-title text-fuchsia-600 text-2xl font-bold">
             {movie.title || <div className="skeleton w-1/2 h-6 bg-gray-300"></div>}
           </h2>
           <p>
@@ -137,7 +137,7 @@ const MovieDetails = () => {
             {movie.summary || <div className="skeleton w-full h-12 bg-gray-300"></div>}
           </p>
           <div className="card-actions justify-between mt-4">
-            <button className="btn btn-error btn-outline" onClick={handleDelete}>
+            <button className="btn btn-error bg-red-600 btn-outline" onClick={handleDelete}>
               Delete
             </button>
             <Link to={`/updateMovie/${id}`}>
@@ -148,7 +148,7 @@ const MovieDetails = () => {
             </button>
           </div>
           <button
-            className="btn btn-secondary mt-4"
+            className="mt-4 bg-gradient-to-r from-indigo-900 via-purple-800 to-black text-white px-4 py-2 rounded w-full hover:bg-blue-600"
             onClick={() => navigate(location.state?.from || "/allMovies")}
           >
             Back

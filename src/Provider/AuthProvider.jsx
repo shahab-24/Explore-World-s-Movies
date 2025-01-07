@@ -11,6 +11,7 @@ import {
 import { auth } from "../firebase.config";
 
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
+ 
 
 
 
@@ -38,6 +40,7 @@ const AuthProvider = ({ children }) => {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        
         Swal.fire({
           position: "top-center",
           icon: "success",

@@ -2,19 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
 
 const FavouriteMovies = () => {
   const { user } = useContext(AuthContext);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {id} = useParams()
-  console.log(id)
+  const { id } = useParams();
 
   useEffect(() => {
     if (user?.email) {
-      fetch(
-        `https://explore-world-movies-server.vercel.app/favouriteMovies/${user?.email}`
-      )
+      fetch(`https://explore-world-movies-server.vercel.app/favouriteMovies/${user?.email}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error("Failed to fetch movies");
@@ -44,9 +42,7 @@ const FavouriteMovies = () => {
     }
   }, [user?.email]);
 
-
   const handleDelete = (id) => {
-    console.log(id)
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -57,12 +53,9 @@ const FavouriteMovies = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://explore-world-movies-server.vercel.app/favouriteMovies/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`https://explore-world-movies-server.vercel.app/favouriteMovies/${id}`, {
+          method: "DELETE",
+        })
           .then((res) => {
             if (!res.ok) {
               throw new Error("Failed to delete the movie");
@@ -70,8 +63,7 @@ const FavouriteMovies = () => {
             return res.json();
           })
           .then(() => {
-            const remainingMovies = movies.filter((movie) => movie._id !== id)
-            console.log(remainingMovies)
+            const remainingMovies = movies.filter((movie) => movie._id !== id);
             setMovies(remainingMovies);
             Swal.fire("Deleted!", "The movie has been deleted.", "success");
           })
@@ -88,47 +80,83 @@ const FavouriteMovies = () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <h2 className="text-3xl font-bold text-center mb-6">Favourite Movies</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {loading ? (
-          Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="card bg-base-100 shadow-xl">
-              <figure className="w-full h-72 skeleton bg-gray-300"></figure>
-              <div className="card-body">
-                <div className="skeleton w-full h-6 bg-gray-300 mb-2"></div>
-                <div className="skeleton w-1/2 h-4 bg-gray-300 mb-2"></div>
-                <div className="skeleton w-1/4 h-4 bg-gray-300 mb-2"></div>
-                <div className="skeleton w-1/4 h-4 bg-gray-300"></div>
-              </div>
-            </div>
-          ))
-        ) : (
-          movies.map((movie) => (
-            <div key={movie._id} className="card bg-base-100 shadow-xl">
-              <figure>
-                <img
-                  src={movie.poster}
-                  alt={movie.title}
-                  className="w-full h-72 object-cover"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{movie.title}</h2>
-                <p>Genre: {movie.genre}</p>
-                <p>Duration: {movie.duration} min</p>
-                <p>Release Year: {movie.releaseYear}</p>
-                <p className="text-yellow-500">Rating: {movie.rating}⭐</p>
-                <button
-                  onClick={() => handleDelete(movie._id)}
-                  className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-200"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))
-        )}
+    <div
+      className="container mx-auto text-fuchsia-600 py-8 bg-cover bg-center min-h-screen"
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1598899134739-fb134e5589e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080')" }}
+    >
+      <h2 className="text-4xl font-bold text-center mb-6 text-fuchsia-700">Favourite Movies</h2>
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full text-left bg-white rounded-lg shadow-md animate__animated animate__fadeInUp">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="px-4 py-2 border">Poster</th>
+              <th className="px-4 py-2 border">Title</th>
+              <th className="px-4 py-2 border">Genre</th>
+              <th className="px-4 py-2 border">Duration</th>
+              <th className="px-4 py-2 border">Release Year</th>
+              <th className="px-4 py-2 border">Rating</th>
+              <th className="px-4 py-2 border">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              Array.from({ length: 5 }).map((_, index) => (
+                <tr key={index} className="animate-pulse">
+                  <td className="px-4 py-2 border">
+                    <div className="w-24 h-32 bg-gray-300 rounded-md"></div>
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <div className="h-6 bg-gray-300 rounded-md w-32"></div>
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <div className="h-6 bg-gray-300 rounded-md w-20"></div>
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <div className="h-6 bg-gray-300 rounded-md w-16"></div>
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <div className="h-6 bg-gray-300 rounded-md w-24"></div>
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <div className="h-6 bg-gray-300 rounded-md w-12"></div>
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <div className="h-6 bg-gray-300 rounded-md w-16"></div>
+                  </td>
+                </tr>
+              ))
+            ) : movies.length > 0 ? (
+              movies.map((movie) => (
+                <tr key={movie._id} className="hover:bg-gray-100">
+                  <td className="px-4 py-2 border">
+                    <img
+                      src={movie.poster}
+                      alt={movie.title}
+                      className="w-24 h-24 object-cover rounded-md border border-gray-300"
+                    />
+                  </td>
+                  <td className="px-4 py-2 border font-bold">{movie.title}</td>
+                  <td className="px-4 py-2 border">{movie.genre}</td>
+                  <td className="px-4 py-2 border">{movie.duration} min</td>
+                  <td className="px-4 py-2 border">{movie.releaseYear}</td>
+                  <td className="px-4 py-2 border text-yellow-500">{movie.rating}⭐</td>
+                  <td className="px-4 py-2 border">
+                    <button
+                      onClick={() => handleDelete(movie._id)}
+                      className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-200 flex items-center justify-center"
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7" className="text-center py-4 border">No favorite movies found.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
