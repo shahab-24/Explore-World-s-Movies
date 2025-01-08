@@ -35,23 +35,24 @@ Arabian World Movies is an interactive movie portal designed to enhance the movi
 ## Technology Stack  
 
 ### Frontend:  
-- **React.js:** A powerful JavaScript library for building user interfaces.  
-- **Tailwind CSS:** A utility-first CSS framework for rapid and responsive design.  
-- **DaisyUI:** Pre-built components for Tailwind CSS to streamline UI development.  
-- **AOS (Animate on Scroll):** Smooth scroll animations for a modern feel.  
-- **Animate.css:** A CSS library for engaging animations.  
-- **React Hook Form:** Simplified form handling and validation.  
-- **React Rating Star:** For intuitive movie rating displays.  
-- **SweetAlert2:** For user-friendly alerts and notifications.
+- ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) **React.js:** A powerful JavaScript library for building user interfaces.  
+- ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white&style=flat-square) **Tailwind CSS:** A utility-first CSS framework for rapid and responsive design.  
+- ![DaisyUI](https://img.shields.io/badge/-DaisyUI-5A0FC8?logo=daisyui&logoColor=white&style=flat-square) **DaisyUI:** Pre-built components for Tailwind CSS to streamline UI development.  
+- ![AOS](https://img.shields.io/badge/-AOS-00A8CC?style=flat-square) **AOS (Animate on Scroll):** Smooth scroll animations for a modern feel.  
+- ![Animate.css](https://img.shields.io/badge/-Animate.css-FF4088?logo=css3&logoColor=white&style=flat-square) **Animate.css:** A CSS library for engaging animations.  
+- ![React Hook Form](https://img.shields.io/badge/-React%20Hook%20Form-EC5990?logo=react&logoColor=white&style=flat-square) **React Hook Form:** Simplified form handling and validation.  
+- ![React Rating Star](https://img.shields.io/badge/-React%20Rating%20Star-FFD700?logo=star&logoColor=white&style=flat-square) **React Rating Star:** For intuitive movie rating displays.  
+- ![SweetAlert2](https://img.shields.io/badge/-SweetAlert2-5A5?style=flat-square) **SweetAlert2:** For user-friendly alerts and notifications.
 
 ### Backend:  
-- **Express.js:** A robust web framework for Node.js, enabling server-side API development.  
-- **CORS:** Ensures secure Cross-Origin Resource Sharing for seamless client-server interaction.  
-- **dotenv:** Manages environment variables securely.
+- ![Express](https://img.shields.io/badge/-Express.js-000000?logo=express&logoColor=white&style=flat-square) **Express.js:** A robust web framework for Node.js, enabling server-side API development.  
+- ![CORS](https://img.shields.io/badge/-CORS-FF5722?style=flat-square) **CORS:** Ensures secure Cross-Origin Resource Sharing for seamless client-server interaction.  
+- ![dotenv](https://img.shields.io/badge/-dotenv-00C7B7?style=flat-square) **dotenv:** Manages environment variables securely.
 
 ### Authentication and Database:  
-- **Firebase:** Handles user authentication and client-side hosting.  
-- **MongoDB:** Stores movie data for dynamic CRUD operations.
+- ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?logo=firebase&logoColor=black&style=flat-square) **Firebase:** Handles user authentication and client-side hosting.  
+- ![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white&style=flat-square) **MongoDB:** Stores movie data for dynamic CRUD operations.
+
 
 ---
 
