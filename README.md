@@ -86,35 +86,41 @@ Arabian World Movies is an interactive movie portal designed to enhance the movi
     "babel-eslint": "^10.0.0"
   }
 }
-Learning Implementation and Goals
-This project showcases my ability to:
+## Learning Implementation and Goals  
+This project showcases my ability to:  
+1. Design and implement a responsive, dynamic, and interactive web application.  
+2. Work with modern frontend frameworks like React and integrate them with robust backend services.  
+3. Securely handle user authentication and manage sensitive data with Firebase and MongoDB.  
+4. Create smooth animations and user-friendly designs with tools like AOS, Animate.css, and DaisyUI.  
+5. Develop advanced search and filtering functionalities for an enhanced user experience.  
+6. Showcase strong problem-solving and debugging skills through real-time CRUD operations.  
+7. Demonstrate my understanding of full-stack development, database management, and API integration.  
+8. Build an engaging user interface with seamless navigability, improving user experience.  
+9. Work on deploying and maintaining both frontend and backend for a smooth user interaction.
 
-Design and implement a responsive, dynamic, and interactive web application.
-Work with modern frontend frameworks like React and integrate them with robust backend services.
-Securely handle user authentication and manage sensitive data with Firebase and MongoDB.
-Create smooth animations and user-friendly designs with tools like AOS, Animate.css, and DaisyUI.
-Develop advanced search and filtering functionalities for an enhanced user experience.
-Showcase strong problem-solving and debugging skills through real-time CRUD operations.
-Demonstrate my understanding of full-stack development, database management, and API integration.
-Build an engaging user interface with seamless navigability, improving user experience.
-Work on deploying and maintaining both frontend and backend for a smooth user interaction.
-Deployment
-Frontend: Hosted on Firebase for fast and reliable client-side delivery.
-Backend: Deployed on Vercel for seamless server-side performance.
-Running the Project Locally
-Prerequisites
-Make sure you have the following installed on your local machine:
+---
 
-Node.js (with npm)
-MongoDB (if working with the database locally)
-Firebase (for authentication and hosting setup)
-Steps to Run Locally
-Clone the repository:
+## Deployment  
+- **Frontend:** Hosted on Firebase for fast and reliable client-side delivery.  
+- **Backend:** Deployed on Vercel for seamless server-side performance.
 
-bash
-Copy code
-git clone https://github.com/your-username/arabian-world-movies.git
-cd arabian-world-movies
+---
+
+## Running the Project Locally  
+
+### Prerequisites  
+Make sure you have the following installed on your local machine:  
+- **Node.js** (with npm)  
+- **MongoDB** (if working with the database locally)  
+- **Firebase** (for authentication and hosting setup)
+
+### Steps to Run Locally  
+1. **Clone the repository:**  
+   ```bash
+   git clone https://github.com/your-username/arabian-world-movies.git
+   cd arabian-world-movies
+
+
 Install dependencies:
 
 bash
@@ -145,6 +151,6 @@ This repository is pinned to highlight my web development expertise, focusing on
 
 Contact
 Name: Shahab Uddin
-LinkedIn: Your LinkedIn Profile
-GitHub: Your GitHub Profile
-Email: Your Email
+LinkedIn: www.linkedin.com/in/shahab-uddin24
+GitHub: https://github.com/shahab-24
+Email: shahabctg24@gmail.com
