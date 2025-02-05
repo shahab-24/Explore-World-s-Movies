@@ -98,7 +98,7 @@ const MovieDetails = () => {
   }
 
   return (
-    <div className="container mx-auto py-8 bg-blue-50">
+    <div className="container mx-auto py-8 px-4 bg-blue-50">
       <div className="card w-full lg:w-1/2 mx-auto bg-base-100 shadow-xl">
         <figure>
           {!imageLoaded && (
@@ -116,39 +116,39 @@ const MovieDetails = () => {
             {movie.title || <div className="skeleton w-1/2 h-6 bg-gray-300"></div>}
           </h2>
           <p>
-            <span className="font-semibold">Genre:</span>{" "}
-            {movie.genre || <div className="skeleton w-1/4 h-4 bg-gray-300"></div>}
+            <span className="font-semibold">Genre:</span> {movie.genre}
           </p>
           <p>
-            <span className="font-semibold">Duration:</span>{" "}
-            {movie.duration || <div className="skeleton w-1/4 h-4 bg-gray-300"></div>} min
+            <span className="font-semibold">Duration:</span> {movie.duration} min
           </p>
           <p>
-            <span className="font-semibold">Release Year:</span>{" "}
-            {movie.releaseYear || <div className="skeleton w-1/4 h-4 bg-gray-300"></div>}
+            <span className="font-semibold">Release Year:</span> {movie.releaseYear}
           </p>
           <p>
-            <span className="font-semibold">Rating:</span>{" "}
-            <span className="text-yellow-500 font-semibold">
-              {movie.rating ? `${movie.rating}⭐` : <div className="skeleton w-1/4 h-4 bg-gray-300"></div>}
-            </span>
+            <span className="font-semibold">Rating:</span>
+            <span className="text-yellow-500 font-semibold"> {movie.rating}⭐</span>
           </p>
-          <p className="mt-4">
-            {movie.summary || <div className="skeleton w-full h-12 bg-gray-300"></div>}
-          </p>
-          <div className="card-actions justify-between mt-4">
-            <button className="btn btn-error bg-red-600 btn-outline" onClick={handleDelete}>
+          <p className="mt-4">{movie.summary}</p>
+
+          <div className="card-actions mt-6 flex flex-col sm:flex-row sm:justify-evenly gap-4 md:flex-row md:gap-2">
+            <button
+              className="btn btn-error bg-red-600 btn-outline w-full md:w-auto"
+              onClick={handleDelete}
+            >
               Delete
             </button>
-            <Link to={`/updateMovie/${id}`}>
-              <button className="btn btn-outline">Update Movie</button>
+            <Link to={`/updateMovie/${id}`} className="w-full md:w-auto">
+              <button className="btn btn-outline w-full">Update Movie</button>
             </Link>
-            <button className="btn btn-success btn-outline" onClick={handleAddToFavorites}>
+            <button
+              className="btn btn-success btn-outline w-full md:w-auto"
+              onClick={handleAddToFavorites}
+            >
               Add to Favorite
             </button>
           </div>
           <button
-            className="mt-4 bg-gradient-to-r from-indigo-900 via-purple-800 to-black text-white px-4 py-2 rounded w-full hover:bg-blue-600"
+            className="mt-6 bg-gradient-to-r from-indigo-900 via-purple-800 to-black text-white px-4 py-2 rounded w-full hover:bg-blue-600"
             onClick={() => navigate(location.state?.from || "/allMovies")}
           >
             Back

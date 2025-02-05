@@ -6,7 +6,7 @@ const NewsLetterSection = () => {
           <p className="text-lg mb-6">
             Subscribe to our newsletter and never miss out on the latest movies, reviews, and news.
           </p>
-          <form className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <form className="flex flex-col sm:flex-row justify-center text-gray-500 items-center gap-4">
             <input
               type="email"
               placeholder="Enter your email"
