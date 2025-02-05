@@ -1,6 +1,6 @@
 # 🎬 Explore World’s Movies
 
-![Explore World’s Movies](https://i.ibb.co.com/JwCQV9FN/screencapture-explore-world-movies-web-app-2025-02-05-17-44-42.png)
+![Explore World’s Movies](https://i.ibb.co.com/q3pqbx38/screencapture-explore-world-movies-web-app-2025-02-05-23-39-10.png)
 
 ## 🌍 Live Project
 [Explore World’s Movies](https://explore-world-movies.web.app)
