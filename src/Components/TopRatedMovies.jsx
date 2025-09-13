@@ -7,9 +7,7 @@ const TopRatedMovies = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(
-      "https://explore-world-s-movies-server-production.up.railway.app/movies"
-    )
+    fetch("https://explore-world-s-movies-server.onrender.com/movies")
       .then((res) => res.json())
       .then((data) => {
         const topRated = data.filter((movie) => movie.rating >= 4).slice(0, 8); // Fetching top 8 for a balanced layout

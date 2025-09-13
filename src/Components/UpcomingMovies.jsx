@@ -7,9 +7,7 @@ const UpcomingMovies = () => {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://explore-world-s-movies-server-production.up.railway.app/allMovies"
-    )
+    fetch("https://explore-world-s-movies-server.onrender.com/allMovies")
       .then((res) => res.json())
       .then((data) => {
         const currentYear = new Date().getFullYear();
