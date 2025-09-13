@@ -18,7 +18,7 @@ const UpdateMovie = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch(`https://explore-world-movies-server.vercel.app/movies/${id}`)
+    fetch(`https://explore-world-s-movies-server.onrender.com/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
@@ -37,11 +37,14 @@ const UpdateMovie = () => {
   }, [id, setValue]);
 
   const onSubmit = (data) => {
-    fetch(`https://explore-world-movies-server.vercel.app/updateMovie/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
+    fetch(
+      `https://explore-world-s-movies-server-production.up.railway.app/updateMovie/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
@@ -83,22 +86,26 @@ const UpdateMovie = () => {
     <div
       className="container mx-auto py-8 flex justify-center items-center w-full"
       style={{
-        backgroundImage: "url('https://plus.unsplash.com/premium_photo-1667538960183-82690c60a2a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dmludGFnZSUyMG1vdmllcyUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D')", // Replace with a real movie poster
+        backgroundImage:
+          "url('https://plus.unsplash.com/premium_photo-1667538960183-82690c60a2a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dmludGFnZSUyMG1vdmllcyUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D')", // Replace with a real movie poster
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",
         animation: "fadeIn 2s ease-in-out",
-        
       }}
-    
     >
       <div className="bg-transparent p-8 rounded-lg shadow-lg w-full max-w-lg opacity-90 backdrop-blur-md animate__animated animate__fadeIn">
         <h2 className="text-3xl font-bold text-center mb-6 text-blue-600 animate__animated animate__fadeIn animate__delay-1s">
           Update Movie
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 animate__animated animate__fadeIn animate__delay-2s text-fuchsia-600 ">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4 animate__animated animate__fadeIn animate__delay-2s text-fuchsia-600 "
+        >
           <div>
-            <label className="block mb-2 text-lg text-gray-700">Poster URL</label>
+            <label className="block mb-2 text-lg text-gray-700">
+              Poster URL
+            </label>
             <input
               type="text"
               {...register("poster", {
@@ -113,7 +120,9 @@ const UpdateMovie = () => {
           </div>
 
           <div>
-            <label className="block mb-2 text-lg text-gray-700">Movie Title</label>
+            <label className="block mb-2 text-lg text-gray-700">
+              Movie Title
+            </label>
             <input
               type="text"
               {...register("title", {
@@ -148,7 +157,9 @@ const UpdateMovie = () => {
           </div>
 
           <div>
-            <label className="block mb-2 text-lg text-gray-700">Duration (in minutes)</label>
+            <label className="block mb-2 text-lg text-gray-700">
+              Duration (in minutes)
+            </label>
             <input
               type="number"
               {...register("duration", {
@@ -167,7 +178,9 @@ const UpdateMovie = () => {
           </div>
 
           <div>
-            <label className="block mb-2 text-lg text-gray-700">Release Year</label>
+            <label className="block mb-2 text-lg text-gray-700">
+              Release Year
+            </label>
             <select
               {...register("releaseYear", {
                 required: "Please select a release year",
@@ -227,7 +240,6 @@ const UpdateMovie = () => {
             <button
               type="submit"
               className="mt-3 sm:mt-4 bg-gradient-to-r from-indigo-900 via-purple-800 to-black text-white px-3 sm:px-4 py-2 rounded w-full hover:bg-blue-600 ease-in-out transition duration-300 "
-            
             >
               Update Movie
             </button>

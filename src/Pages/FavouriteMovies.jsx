@@ -12,7 +12,9 @@ const FavouriteMovies = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://explore-world-movies-server.vercel.app/favouriteMovies/${user?.email}`)
+      fetch(
+        `https://explore-world-s-movies-server.onrender.com/favouriteMovies/${user?.email}`
+      )
         .then((res) => {
           if (!res.ok) {
             throw new Error("Failed to fetch movies");
@@ -53,9 +55,12 @@ const FavouriteMovies = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://explore-world-movies-server.vercel.app/favouriteMovies/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://explore-world-s-movies-server.onrender.com/favouriteMovies/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => {
             if (!res.ok) {
               throw new Error("Failed to delete the movie");
@@ -82,9 +87,14 @@ const FavouriteMovies = () => {
   return (
     <div
       className="container mx-auto text-fuchsia-600 py-8 bg-cover bg-center min-h-screen"
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1598899134739-fb134e5589e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080')" }}
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1598899134739-fb134e5589e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080')",
+      }}
     >
-      <h2 className="text-4xl font-bold text-center mb-6 text-fuchsia-700">Favourite Movies</h2>
+      <h2 className="text-4xl font-bold text-center mb-6 text-fuchsia-700">
+        Favourite Movies
+      </h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left bg-white rounded-lg shadow-md animate__animated animate__fadeInUp">
           <thead className="bg-gray-800 text-white">
@@ -139,7 +149,9 @@ const FavouriteMovies = () => {
                   <td className="px-4 py-2 border">{movie.genre}</td>
                   <td className="px-4 py-2 border">{movie.duration} min</td>
                   <td className="px-4 py-2 border">{movie.releaseYear}</td>
-                  <td className="px-4 py-2 border text-yellow-500">{movie.rating}⭐</td>
+                  <td className="px-4 py-2 border text-yellow-500">
+                    {movie.rating}⭐
+                  </td>
                   <td className="px-4 py-2 border">
                     <button
                       onClick={() => handleDelete(movie._id)}
@@ -152,7 +164,9 @@ const FavouriteMovies = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="text-center py-4 border">No favorite movies found.</td>
+                <td colSpan="7" className="text-center py-4 border">
+                  No favorite movies found.
+                </td>
               </tr>
             )}
           </tbody>

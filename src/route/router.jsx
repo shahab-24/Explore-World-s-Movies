@@ -37,8 +37,8 @@ const router = createBrowserRouter([
       {
         path: "/allMovies",
         element: <AllMovies></AllMovies>,
-        // loader: () => fetch("https://explore-world-movies-server.vercel.app/allMovies")
-        },
+        // loader: () => fetch("https://explore-world-s-movies-server.onrender.com/allMovies")
+      },
       {
         path: "/favouriteMovies",
         element: (
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-    
+
       {
         path: "/login",
         element: <Login></Login>,
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         element: <MovieDetails></MovieDetails>,
         loader: ({ params }) =>
           fetch(
-            `https://explore-world-movies-server.vercel.app/movies/${params.id}`
+            `https://explore-world-s-movies-server.onrender.com/movies/${params.id}`
           ),
       },
       {

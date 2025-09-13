@@ -20,10 +20,8 @@ const Signup = () => {
     const photo = form.photo.value;
     const password = form.password.value;
 
-
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-
 
     if (!name || !email || !photo || !password) {
       Swal.fire({
@@ -38,18 +36,17 @@ const Signup = () => {
       Swal.fire({
         icon: "warning",
         title: "Invalid Password",
-        text:
-          "Password must be at least 6 characters, include uppercase, lowercase, number, and a special character.",
+        text: "Password must be at least 6 characters, include uppercase, lowercase, number, and a special character.",
       });
       return;
     }
 
-    setErr(""); 
+    setErr("");
 
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        fetch("https://explore-world-movies-server.vercel.app/users", {
+        fetch("https://explore-world-s-movies-server-production.up.railway.app/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -69,7 +66,6 @@ const Signup = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-    
       })
       .catch((error) => {
         Swal.fire({

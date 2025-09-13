@@ -6,7 +6,9 @@ const FeaturedMovies = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://explore-world-movies-server.vercel.app/movies")
+    fetch(
+      "https://explore-world-s-movies-server-production.up.railway.app/movies"
+    )
       .then((res) => res.json())
       .then((data) => setMovies(data));
   }, []);
@@ -29,10 +31,18 @@ const FeaturedMovies = () => {
                 className="w-full h-[200px] sm:h-[250px] object-cover"
               />
               <div className="p-3 sm:p-4">
-                <h3 className="text-lg font-bold mb-1 sm:mb-2 text-fuchsia-600">{movie.title}</h3>
-                <p className="text-gray-700 text-sm sm:text-base mb-1">{movie.genre}</p>
-                <p className="text-gray-700 text-sm sm:text-base mb-1">{movie.duration} min</p>
-                <p className="text-gray-700 text-sm sm:text-base mb-1">{movie.releaseYear}</p>
+                <h3 className="text-lg font-bold mb-1 sm:mb-2 text-fuchsia-600">
+                  {movie.title}
+                </h3>
+                <p className="text-gray-700 text-sm sm:text-base mb-1">
+                  {movie.genre}
+                </p>
+                <p className="text-gray-700 text-sm sm:text-base mb-1">
+                  {movie.duration} min
+                </p>
+                <p className="text-gray-700 text-sm sm:text-base mb-1">
+                  {movie.releaseYear}
+                </p>
                 <p className="text-yellow-500 font-bold text-sm sm:text-base">
                   {movie.rating}⭐
                 </p>

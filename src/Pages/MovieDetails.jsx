@@ -12,7 +12,7 @@ const MovieDetails = () => {
   const location = useLocation();
 
   useEffect(() => {
-    fetch(`https://explore-world-movies-server.vercel.app/movies/${id}`)
+    fetch(`https://explore-world-s-movies-server.onrender.com/movies/${id}`)
       .then((res) => res.json())
       .then((data) => setMovie(data))
       .catch((error) => console.error("Error fetching movie details:", error));
@@ -32,9 +32,12 @@ const MovieDetails = () => {
       cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://explore-world-movies-server.vercel.app/movies/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://explore-world-s-movies-server.onrender.com/movies/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -43,7 +46,11 @@ const MovieDetails = () => {
             }
           })
           .catch((error) => {
-            Swal.fire("Error", "There was an error deleting the movie.", "error");
+            Swal.fire(
+              "Error",
+              "There was an error deleting the movie.",
+              "error"
+            );
             console.error("Error deleting movie:", error);
           });
       }
@@ -61,13 +68,16 @@ const MovieDetails = () => {
       rating: movie.rating,
       summary: movie.summary,
     };
-    fetch(`https://explore-world-movies-server.vercel.app/favouriteMovies`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(favoriteMovie),
-    })
+    fetch(
+      `https://explore-world-s-movies-server.onrender.com/favouriteMovies`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(favoriteMovie),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         Swal.fire("Added!", "Movie added to favorites!", "success");
@@ -107,26 +117,35 @@ const MovieDetails = () => {
           <img
             src={movie.poster}
             alt={movie.title}
-            className={`w-full h-72 object-cover ${imageLoaded ? "" : "hidden"}`}
+            className={`w-full h-72 object-cover ${
+              imageLoaded ? "" : "hidden"
+            }`}
             onLoad={handleImageLoad}
           />
         </figure>
         <div className="card-body text-black">
           <h2 className="card-title text-fuchsia-600 text-2xl font-bold">
-            {movie.title || <div className="skeleton w-1/2 h-6 bg-gray-300"></div>}
+            {movie.title || (
+              <div className="skeleton w-1/2 h-6 bg-gray-300"></div>
+            )}
           </h2>
           <p>
             <span className="font-semibold">Genre:</span> {movie.genre}
           </p>
           <p>
-            <span className="font-semibold">Duration:</span> {movie.duration} min
+            <span className="font-semibold">Duration:</span> {movie.duration}{" "}
+            min
           </p>
           <p>
-            <span className="font-semibold">Release Year:</span> {movie.releaseYear}
+            <span className="font-semibold">Release Year:</span>{" "}
+            {movie.releaseYear}
           </p>
           <p>
             <span className="font-semibold">Rating:</span>
-            <span className="text-yellow-500 font-semibold"> {movie.rating}⭐</span>
+            <span className="text-yellow-500 font-semibold">
+              {" "}
+              {movie.rating}⭐
+            </span>
           </p>
           <p className="mt-4">{movie.summary}</p>
 
