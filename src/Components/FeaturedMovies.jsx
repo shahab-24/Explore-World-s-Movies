@@ -7,7 +7,7 @@ const FeaturedMovies = () => {
 
   useEffect(() => {
     fetch(
-      "https://explore-world-s-movies-server-production.up.railway.app/movies"
+      "https://explore-world-s-movies-server.onrender.com/movies"
     )
       .then((res) => res.json())
       .then((data) => setMovies(data));

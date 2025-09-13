@@ -38,7 +38,7 @@ const UpdateMovie = () => {
 
   const onSubmit = (data) => {
     fetch(
-      `https://explore-world-s-movies-server-production.up.railway.app/updateMovie/${id}`,
+      `https://explore-world-s-movies-server.onrender.com/updateMovie/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

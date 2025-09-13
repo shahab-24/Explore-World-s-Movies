@@ -46,7 +46,7 @@ const Signup = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        fetch("https://explore-world-s-movies-server-production.up.railway.app/users", {
+        fetch("https://explore-world-s-movies-server.onrender.com/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
